@@ -62,7 +62,7 @@ gameState = np.zeros((nxC, nyC))
 # gameState[21, 23] = 1
 # gameState[20, 23] = 1
 
-# Versión de mi autómata que siempre aparece centrada: Autómata Jonatandb :)
+# Versión inicial del autómata
 posInitX = int((nxC / 2) - 3)
 posInitY = int((nyC / 2) - 5)
 gameState[posInitX, posInitY] = 1
@@ -93,6 +93,8 @@ iteration = 0
 # Bucle de ejecución principal (Main Loop):
 while not endGame:
 
+    contador = 1
+    
     newGameState = np.copy(gameState)
 
     # Vuelvo a colorear la pantalla con el color de fondo
@@ -176,15 +178,36 @@ while not endGame:
                     + gameState[(x + 1) % nxC, (y + 1) % nyC]
                 )
 
+                
                 # Una célula muerta con exactamente 3 células vecinas vivas "nace"
                 # (es decir, al turno siguiente estará viva).
                 if gameState[x, y] == 0 and n_neigh == 3:
                     newGameState[x, y] = 1
 
-                # Una célula viva con 2 o 3 células vecinas vivas sigue viva,
-                # en otro caso muere (por "soledad" o "superpoblación")
-                elif gameState[x, y] == 1 and (n_neigh < 2 or n_neigh > 3):
-                    newGameState[x, y] = 0
+                # Una célula viva dependiendo de la cantidad de vecinos,
+                # se mueve más rápido
+                if gameState[x, y] == 1 and (n_neigh < 2 or n_neigh > 3):
+                    if n_neigh == 7 and contador % 10 == 0:
+                        newGameState[x, y] = 0
+                    elif n_neigh == 6 and contador % 20 == 0:
+                        newGameState[x, y] = 0
+                    elif n_neigh == 5 and contador % 30 == 0:
+                        newGameState[x, y] = 0
+                    elif n_neigh == 4 and contador % 40 == 0:
+                        newGameState[x, y] = 0
+                    elif n_neigh == 3 and contador % 50 == 0:
+                        gameState[x, y] = newGameState[x + 1, y + 1]
+                    elif n_neigh == 2 and contador % 60 == 0:
+                        gameState[x, y] = newGameState[x + 1, y + 1]
+                    elif n_neigh == 1 and contador % 70 == 0:
+                        newGameState[x, y] = 0
+                    elif n_neigh == 0 and contador % 80 == 0:
+                        newGameState[x, y] = 0
+
+                    contador += 1
+
+                    if contador == 5000:
+                        contador = 1
 
             # Incremento el contador de población:
             if gameState[x, y] == 1:
@@ -213,11 +236,11 @@ while not endGame:
                     pygame.draw.polygon(screen, (255, 255, 255), poly, 0)
 
     # Actualizo el título de la ventana
-    title = f"Juego de la vida  - Población: {population} - Generación: {iteration}"
+    """title = f"Juego de la vida  - Población: {population} - Generación: {iteration}"
     if pauseExec:
         title += " - [PAUSADO]"
     pygame.display.set_caption(title)
-    print(title)
+    print(title)"""
     
     # Actualizo gameState
     gameState = np.copy(newGameState)
