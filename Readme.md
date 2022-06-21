@@ -4,9 +4,9 @@
 
 - Una célula viva con 2 o 3 células vecinas vivas sigue viva, en otro caso muere (por "soledad" o "superpoblación").
 
-## Cómo jugar:
+- No todas las celulas cambian en cada iteracion si no que el cambio se da cada cierto tiempo dependiendo de la cantidad de vecinos que tenga cada celula.
 
-- ### Al abrir el sitio con el juego presionar el botón "Run" para que comience
+## Cómo jugar:
 
 - ### Click a una celda le da "vida" y si estaba "viva" entonces se la "mata"
 
@@ -15,6 +15,13 @@
 - #### El juego pausado se puede utilizar para crear autómatas :-)
 
 ---
+## Dependencias usadas:
+
+Pygame
+
+Numpy
+---
+
 
 ## Páginas consultadas:
 ### Game of life:
