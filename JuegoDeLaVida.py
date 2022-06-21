@@ -163,6 +163,7 @@ while not endGame:
 
     # Recorro cada una de las celdas generadas
     for y in range(0, nxC):
+        
         for x in range(0, nyC):
 
             if not pauseExec:
@@ -179,7 +180,6 @@ while not endGame:
                     + gameState[(x + 1) % nxC, (y + 1) % nyC]
                 )
 
-                
                 # Una célula muerta con exactamente 3 células vecinas vivas "nace"
                 # (es decir, al turno siguiente estará viva).
                 if gameState[x, y] == 0 and n_neigh == 3:
@@ -188,15 +188,15 @@ while not endGame:
                 # Una célula viva dependiendo de la cantidad de vecinos,
                 # se mueve más rápido
                 if gameState[x, y] == 1:
-                    if n_neigh == 7 and contador % 1 == 0:
+                    if n_neigh == 7 and iteration % 1 == 0:
                         newGameState[x, y] = 0
-                    elif n_neigh == 6 and contador % 4 == 0:
+                    elif n_neigh == 6 and iteration % 4 == 0:
                         newGameState[x, y] = 0
-                    elif n_neigh == 5 and contador % 9 == 0:
+                    elif n_neigh == 5 and iteration % 9 == 0:
                         newGameState[x, y] = 0
-                    elif n_neigh == 4 and contador % 16 == 0:
+                    elif n_neigh == 4 and iteration % 16 == 0:
                         newGameState[x, y] = 0
-                    elif n_neigh == 3 and contador % 25 == 0:
+                    elif n_neigh == 3 and iteration % 25 == 0:
                         if x == 0:
                             newGameState[x, y] = 0
                             newGameState[x + 1, y] = 1
@@ -209,7 +209,7 @@ while not endGame:
                         elif y == nyC:
                             newGameState[x, y] = 0
                             newGameState[x, y - 1] = 1
-                        elif y > 0 and x > 0 and x > nxC and y > nyC:
+                        elif y > 0 and x > 0 and x < nxC and y < nyC:
                             ranX = random.randint(-1, 1)
                             ranY = random.randint(-1, 1)
                             newGameState[x, y] = 0
@@ -227,21 +227,15 @@ while not endGame:
                         elif y == nyC:
                             newGameState[x, y] = 0
                             newGameState[x, y - 1] = 1
-                        elif y > 0 and x > 0 and x > nxC and y > nyC:
+                        elif y > 0 and x > 0 and x < nxC and y < nyC:
                             ranX = random.randint(-1, 1)
                             ranY = random.randint(-1, 1)
                             newGameState[x, y] = 0
                             newGameState[x + ranX, y + ranY] = 1
-                    elif n_neigh == 1 and contador % 49 == 0:
+                    elif n_neigh == 1 and iteration % 49 == 0:
                         newGameState[x, y] = 0
-                    elif n_neigh == 0 and contador % 64 == 0:
+                    elif n_neigh == 0 and iteration % 64 == 0:
                         newGameState[x, y] = 0
-
-                    contador += 1
-                    print(contador)
-
-                    if contador == 1680:
-                        contador = 1
 
             # Incremento el contador de población:
             if gameState[x, y] == 1:
