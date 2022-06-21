@@ -214,7 +214,7 @@ while not endGame:
                             ranY = random.randint(-1, 1)
                             newGameState[x, y] = 0
                             newGameState[x + ranX, y + ranY] = 1
-                    elif n_neigh == 2 and contador % 36 == 0:
+                    elif n_neigh == 2 and iteration % 36 == 0:
                         if x == 0:
                             newGameState[x, y] = 0
                             newGameState[x + 1, y] = 1
