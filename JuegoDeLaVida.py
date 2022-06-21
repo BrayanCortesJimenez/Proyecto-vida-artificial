@@ -9,7 +9,7 @@ os.environ["SDL_VIDEO_CENTERED"] = "1"
 pygame.init()
 
 # Establezco el título de la ventana:
-pygame.display.set_caption("Juego de la vida - Jonatandb")
+pygame.display.set_caption("Juego de la vida ")
 
 # Carga el icono si existe
 iconPath = "./icono-2.svg"
