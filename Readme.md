@@ -18,6 +18,7 @@
 ## Dependencias usadas:
 
 Pygame
+---
 
 Numpy
 ---
