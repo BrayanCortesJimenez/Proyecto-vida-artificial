@@ -1,3 +1,4 @@
+import random
 import pygame
 import time, os
 import numpy as np
@@ -186,27 +187,60 @@ while not endGame:
 
                 # Una célula viva dependiendo de la cantidad de vecinos,
                 # se mueve más rápido
-                if gameState[x, y] == 1 and (n_neigh < 2 or n_neigh > 3):
-                    if n_neigh == 7 and contador % 10 == 0:
+                if gameState[x, y] == 1:
+                    if n_neigh == 7 and contador % 1 == 0:
                         newGameState[x, y] = 0
-                    elif n_neigh == 6 and contador % 20 == 0:
+                    elif n_neigh == 6 and contador % 4 == 0:
                         newGameState[x, y] = 0
-                    elif n_neigh == 5 and contador % 30 == 0:
+                    elif n_neigh == 5 and contador % 9 == 0:
                         newGameState[x, y] = 0
-                    elif n_neigh == 4 and contador % 40 == 0:
+                    elif n_neigh == 4 and contador % 16 == 0:
                         newGameState[x, y] = 0
-                    elif n_neigh == 3 and contador % 50 == 0:
-                        gameState[x, y] = newGameState[x + 1, y + 1]
-                    elif n_neigh == 2 and contador % 60 == 0:
-                        gameState[x, y] = newGameState[x + 1, y + 1]
-                    elif n_neigh == 1 and contador % 70 == 0:
+                    elif n_neigh == 3 and contador % 25 == 0:
+                        if x == 0:
+                            newGameState[x, y] = 0
+                            newGameState[x + 1, y] = 1
+                        elif x == nxC:
+                            newGameState[x, y] = 0
+                            newGameState[x - 1, y] = 1
+                        elif y == 0:
+                            newGameState[x, y] = 0
+                            newGameState[x, y + 1] = 1
+                        elif y == nyC:
+                            newGameState[x, y] = 0
+                            newGameState[x, y - 1] = 1
+                        elif y > 0 and x > 0 and x > nxC and y > nyC:
+                            ranX = random.randint(-1, 1)
+                            ranY = random.randint(-1, 1)
+                            newGameState[x, y] = 0
+                            newGameState[x + ranX, y + ranY] = 1
+                    elif n_neigh == 2 and contador % 36 == 0:
+                        if x == 0:
+                            newGameState[x, y] = 0
+                            newGameState[x + 1, y] = 1
+                        elif x == nxC:
+                            newGameState[x, y] = 0
+                            newGameState[x - 1, y] = 1
+                        elif y == 0:
+                            newGameState[x, y] = 0
+                            newGameState[x, y + 1] = 1
+                        elif y == nyC:
+                            newGameState[x, y] = 0
+                            newGameState[x, y - 1] = 1
+                        elif y > 0 and x > 0 and x > nxC and y > nyC:
+                            ranX = random.randint(-1, 1)
+                            ranY = random.randint(-1, 1)
+                            newGameState[x, y] = 0
+                            newGameState[x + ranX, y + ranY] = 1
+                    elif n_neigh == 1 and contador % 49 == 0:
                         newGameState[x, y] = 0
-                    elif n_neigh == 0 and contador % 80 == 0:
+                    elif n_neigh == 0 and contador % 64 == 0:
                         newGameState[x, y] = 0
 
                     contador += 1
+                    print(contador)
 
-                    if contador == 5000:
+                    if contador == 1680:
                         contador = 1
 
             # Incremento el contador de población:
