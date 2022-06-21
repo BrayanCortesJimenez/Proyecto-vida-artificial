@@ -3,6 +3,8 @@ import pygame
 import time, os
 import numpy as np
 
+##Faltan las condiciones de medir cuanto se movieron las celulas.
+
 # Hago que la ventana aparezca centrada en Windows
 os.environ["SDL_VIDEO_CENTERED"] = "1"
 
