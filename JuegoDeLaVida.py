@@ -209,7 +209,7 @@ while not endGame:
                         elif y == nyC:
                             newGameState[x, y] = 0
                             newGameState[x, y - 1] = 1
-                        elif y > 0 and x > 0 and x < nxC and y < nyC:
+                        elif y > 0 and x > 0 and x < nxC - 1 and y < nyC - 1:
                             ranX = random.randint(-1, 1)
                             ranY = random.randint(-1, 1)
                             newGameState[x, y] = 0
@@ -227,7 +227,7 @@ while not endGame:
                         elif y == nyC:
                             newGameState[x, y] = 0
                             newGameState[x, y - 1] = 1
-                        elif y > 0 and x > 0 and x < nxC and y < nyC:
+                        elif y > 0 and x > 0 and x < nxC - 1 and y < nyC - 1:
                             ranX = random.randint(-1, 1)
                             ranY = random.randint(-1, 1)
                             newGameState[x, y] = 0
