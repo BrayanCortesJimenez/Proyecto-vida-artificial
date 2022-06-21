@@ -40,28 +40,9 @@ nxC, nyC = 60, 60
 dimCW = width / nxC
 dimCH = height / nyC
 
-# Estructura de datos que contiene todos los estados de las diferentes celdas
-# Estados de las celdas: Vivas = 1 - Muertas = 0
+
 # Inicializo matriz con ceros
 gameState = np.zeros((nxC, nyC))
-
-# Autómata palo:
-# 0 1 0
-# 0 1 0
-# 0 1 0
-# gameState[5, 3] = 1
-# gameState[5, 4] = 1
-# gameState[5, 5] = 1
-
-# Autómata móvil:
-# 0 1 0
-# 0 0 1
-# 1 1 1
-# gameState[21, 21] = 1
-# gameState[22, 22] = 1
-# gameState[22, 23] = 1
-# gameState[21, 23] = 1
-# gameState[20, 23] = 1
 
 # Versión inicial del autómata
 posInitX = int((nxC / 2) - 3)
@@ -98,10 +79,10 @@ while not endGame:
     
     newGameState = np.copy(gameState)
 
-    # Vuelvo a colorear la pantalla con el color de fondo
+    # Refill de la pantalla con color del fondo
     screen.fill(bg)
 
-    # Agrego pequeña pausa para que el cpu no trabaje al 100%
+    # Pausa para descanso de la cpu%
     time.sleep(0.1)
 
     # Registro de eventos de teclado y mouse
@@ -134,10 +115,10 @@ while not endGame:
                 # Si tocan cualquier tecla no contemplada, pauso o reanudo el juego
                 pauseExec = not pauseExec
 
-        # Detección de click del mouse:
+        # Detección evento mouse click:
         mouseClick = pygame.mouse.get_pressed()
 
-        # Obtención de posición del cursor en la pantalla:
+        # Evento pos cursor
         # Si se hace click con cualquier botón del mouse, se obtiene un valor en mouseClick mayor a cero
         if sum(mouseClick) > 0:
 
@@ -186,7 +167,7 @@ while not endGame:
                     newGameState[x, y] = 1
 
                 # Una célula viva dependiendo de la cantidad de vecinos,
-                # se mueve más rápido
+                # Velocidad de movimiento
                 if gameState[x, y] == 1:
                     if n_neigh == 7 and iteration % 1 == 0:
                         newGameState[x, y] = 0
@@ -263,13 +244,6 @@ while not endGame:
                     # Con el juego ejecutándose pinto de blanco las celdas
                     pygame.draw.polygon(screen, (255, 255, 255), poly, 0)
 
-    # Actualizo el título de la ventana
-    """title = f"Juego de la vida  - Población: {population} - Generación: {iteration}"
-    if pauseExec:
-        title += " - [PAUSADO]"
-    pygame.display.set_caption(title)
-    print(title)"""
-    
     # Actualizo gameState
     gameState = np.copy(newGameState)
 
