@@ -17,10 +17,10 @@
 ---
 ## Dependencias usadas:
 
-Pygame
+- Pygame
 ---
 
-Numpy
+- Numpy
 ---
 
 
